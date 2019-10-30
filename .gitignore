@@ -43,5 +43,8 @@ testem.log
 Thumbs.db
 
 
-/server/node_modules
-/server/dist
+server/node_modules
+server/dist/*
+
+
+*.pem
