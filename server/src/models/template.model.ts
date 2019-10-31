@@ -1,17 +1,14 @@
-import mongoose, { Schema, Model } from "mongoose";
+import * as mongoose from 'mongoose';
 
-const TemplateSchema: Schema = new mongoose.Schema({
-    firstname: String,
-    surname: String,
-    type: String,
-    value: Number,
-});
+import * as increment from 'mongoose-auto-increment';
+
+type TemplateSchema = ITemplate & mongoose.Document;
 
 export interface ITemplate {
-    firstname: string,
-    surname: string,
-    type: string,
-    value: number,
+    _id: Number
+    name: string,
 }
 
-export const Template: mongoose.Model<any> = mongoose.model("Template", TemplateSchema);
+export const Template: mongoose.Model<TemplateSchema> = mongoose.model("Template", new mongoose.Schema({
+    name: { type: String, required: true }
+})); 

@@ -7,6 +7,10 @@ This project is a base for building a mean application.
 - [A] Angular
 - [N] Nodejs
 
+
+## Contains
+- A template for crud operations in both frontend and backend to modify mongodb connection
+- Https solution and standard solution to run backend
 ## commands
 
 
@@ -18,6 +22,7 @@ it will also build the project into server/dist whenever frontend/angular applic
 ```npm run dev-https```
 will execute npm *run dev but* backend with https instead.
 you would have to generate keys in /server/security like following
+
 ```OpenSSL> req -newkey rsa:2048 -nodes -keyout keytemp.pem -x509 -days 365 -out cert.pem```
 ```OpenSSL> rsa -in keytemp.pem -out key.pem```
 

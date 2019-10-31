@@ -8,9 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "concurrently  \"ng build --watch\"  \"ng serve --port 4100\" \"npm run backend\" ",
+    "dev": "concurrently  \"ng build --watch\"  \"ng serve --port 4200\" \"npm run backend\" ",
     "backend": "(cd server && npm run dev)",
-    "dev-https": "concurrently  \"ng build --watch\"  \"ng serve --port 4100\" \"npm run backend\" ",
+    "dev-https": "concurrently  \"ng build --watch\"  \"ng serve --port 4200\" \"npm run backend\" ",
     "backend-https": "(cd server && npm run dev-https)"
 
   },

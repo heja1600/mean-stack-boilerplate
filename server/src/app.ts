@@ -5,6 +5,7 @@ import { Application } from 'express';
 import mongoose from 'mongoose';
 import { TemplateRoutes } from './routes/template.routes';
 import { TemplateController } from './controllers/template.controller';
+import { MONGO_URL, PORT } from './constants';
 
 class App {
 
@@ -15,15 +16,16 @@ class App {
      * @param templateRoutes is for default routes.
      * @param templateController is for routes, but where mongodb crud events happens.
      */
-    public templateRoutes: TemplateRoutes = new TemplateRoutes();
-    public templateController: TemplateController = new TemplateController(this.app);
+    // public templateRoutes: TemplateRoutes = new TemplateRoutes();
+    public templateController: TemplateController;
 
-    private readonly mongoUrl: string = 'mongodb://localhost/CRMdb';
-    private readonly PORT = 3000;
+    private readonly mongoUrl: string = MONGO_URL;
+    private readonly PORT = PORT;
 
     constructor() {
         this.app = express();
         this.config();
+        this.templateController = new TemplateController(this.app);
         this.mongoSetup();        
     }
 
@@ -35,7 +37,7 @@ class App {
         this.app.use(bodyParser.urlencoded({ extended: false }));
 
         // send dist folder 
-        this.app.use('/', express.static(path.join(__dirname, 'dist')));
+        this.app.use('/', express.static(path.join(__dirname, '../dist'))); 
 
         // Set port number
         this.app.set('port', process.env.PORT || this.PORT);
@@ -44,8 +46,10 @@ class App {
         this.app.use(function (req, res, next) {
 
           // Website you wish to allow to connect
-          res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+          res.setHeader('Access-Control-Allow-Origin', '*');
         
+          res.setHeader('Content-Type', 'application/json');
+
           // Request methods you wish to allow
           res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         
@@ -54,7 +58,7 @@ class App {
         
           // Set to true if you need the website to include cookies in the requests sent
           // to the API (e.g. in case you use sessions)
-          res.setHeader('Access-Control-Allow-Credentials', 'true' );
+          res.setHeader('Access-Control-Allow-Credentials', 'true');
         
           // Pass to next layer of middleware
           next();
@@ -64,11 +68,10 @@ class App {
     private mongoSetup(): void {
       mongoose.Promise = global.Promise;
       mongoose.connect(this.mongoUrl, {useNewUrlParser: true})
-        .then(() => console.log('successfully connected to mongodb'))
-        .catch(error => console.log(error)
+        .then(() => console.log(`successfully connected to  ${this.mongoUrl}`))
+        .catch(error => console.error('failed to connect to mongodb' + error)
       ); 
     }
-
 }
 
 export default new App().app;
