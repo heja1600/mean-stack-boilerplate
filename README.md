@@ -7,6 +7,12 @@ This project is a base for building a mean application.
 - [A] Angular
 - [N] Nodejs
 
+##
+
+to get started:
+`git fetch git@github.com:heja1600/mean-startup-typescript.git`
+and
+`git pull git@github.com:heja1600/mean-startup-typescript.git`
 
 ## Contains
 - A template for crud operations in both frontend and backend to modify mongodb connection
