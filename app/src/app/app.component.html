@@ -1,9 +1,8 @@
-<div class="button" (click)="addTemplate()">
-  Add template
-</div>
-<div class="button" (click)="getAllTemplates()">
-  Get all templates
-</div>
+
+<div>
+<button class="button" mat-raised-button (click)="addTemplate()">   Add template</button>
+
+<button class="button" mat-raised-button (click)="getAllTemplates()">     Get all templates</button>
 
 <div *ngFor="let template of templates">
   <div>
@@ -12,5 +11,6 @@
   </div>
    
 </div>
-
+<br>
 <img src="../assets/mean-stacks-main.jpg">
+</div>
